@@ -10,7 +10,7 @@ import java.sql.Date;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
@@ -29,5 +29,17 @@ public class Employee {
     private Date dateGetJob;
 
     @Column
-    private int salary;
+    private long salary;
+
+    public Employee() {
+    }
+
+    public Employee(String name, String surname, Date birthday, String department, Date dateGetJob, long salary) {
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.department = department;
+        this.dateGetJob = dateGetJob;
+        this.salary = salary;
+    }
 }

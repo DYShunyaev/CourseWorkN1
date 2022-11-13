@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>
+        <center>Добавление нового сотрудника</center>
+    </h1>
+    <h2 >Введите данные сотрудника:</h2>
+    <form action="addNewEmployee" th:action="@{addNewEmployee}" th:object="${employee}" method="post">
+        <p>Имя: <input name="name" type="text" th:fieled="*{name}"/></p>
+        <p>Фамилия: <input name="surname" type="text" th:fieled="*{surname}"/></p>
+        <p>Дата рождения: <input name="birthday" type="date" th:fieled="*{birthday}"/></p>
+        <p>Отдел: <input type="text" name="department" th:fieled="*{department}"/></p>
+        <p>Дата трудоустройства: <input name="dateGetJob" type="date" th:fieled="*{dateGetJob}"/></p>
+        <p>Зарплата: <input name="salary" type="number" th:fieled="*{salary}"/></p>
+        <p><input type="submit" value="Ввод"/></p>
+    </form>
+</body>
+</html>
