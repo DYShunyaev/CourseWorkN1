@@ -27,6 +27,8 @@
                 <td th:text="${list.department}">Nothing</td>
                 <td th:text="${list.dateGetJob}">Nothing</td>
                 <td th:text="${list.salary}">Nothing</td>
+                <td><a th:href="${list.id} + '/editEmployee'">Редактировать</a></td>
+                <td><a th:href="${list.id} + '/deleteEmployee'">Удалить</a></td>
             </tr>
         </table>
     </center>

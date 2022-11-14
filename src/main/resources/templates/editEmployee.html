@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>
+  <center>Изменение данных сотрудника</center>
+</h1>
+<h2 >Введите изменения:</h2>
+<form th:object="${editEmpl}" method="post">
+  <p>Имя: <input name="name" type="text" th:value="${name}"/></p>
+  <p>Фамилия: <input name="surname" type="text" th:value="${surname}"/></p>
+  <p>Дата рождения: <input name="birthday" type="date" th:value="${birthday}"/></p>
+  <p>Отдел: <input type="text" name="department" th:value="${department}"/></p>
+  <p>Дата трудоустройства: <input name="dateGetJob" type="date" th:value="${dateGetJob}" /></p>
+  <p>Зарплата: <input name="salary" type="number" th:value="${salary}"/></p>
+  <p><input type="submit" value="Ввод"/></p>
+</form>
+</body>
+</html>

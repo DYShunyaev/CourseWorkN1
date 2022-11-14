@@ -4,13 +4,11 @@ import com.DYShunyaev.CourseWorkN1.entity.Employee;
 import com.DYShunyaev.CourseWorkN1.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -44,10 +42,46 @@ public class EmployeeController {
                                @RequestParam(name = "dateGetJob", required = false, defaultValue = "2000-01-01") Date dateGetJob,
                                @RequestParam(name = "salary", required = false, defaultValue = "0") Long salary) {
         Employee employee = new Employee(name, surname, birthday, department, dateGetJob, salary);
-//        model.getAttribute("employee");
         service.saveEmployee(employee);
+
         return "redirect:/";
     }
 
+    @RequestMapping("/{id}/editEmployee")
+    public String editEmployee(@PathVariable(value = "id") long id, Model model) {
+        if(!service.existById(id)) {
+            return "redirect:/";
+        }
+        Optional<Employee> employee = service.showById(id);
+//        Employee employee = new Employee();
+        model.addAttribute("editEmpl", employee);
 
+        return "editEmployee";
+    }
+
+    @PostMapping("/{id}/editEmployee")
+    public String saveEdit(@PathVariable(value = "id") long id,
+                           @RequestParam(name = "name", required = false) String name,
+                           @RequestParam(name = "surname", required = false) String surname,
+                           @RequestParam(name = "birthday", required = false) Date birthday,
+                           @RequestParam(name = "department", required = false) String department,
+                           @RequestParam(name = "dateGetJob", required = false) Date dateGetJob,
+                           @RequestParam(name = "salary", required = false) Long salary) {
+        Employee employee = service.showById(id).orElseThrow();
+        employee.setName(name);
+        employee.setSurname(surname);
+        employee.setBirthday(birthday);
+        employee.setDepartment(department);
+        employee.setDateGetJob(dateGetJob);
+        employee.setSalary(salary);
+        service.saveEmployee(employee);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/{id}/deleteEmployee")
+    public String deleteEmployeeById(@PathVariable(value = "id") long id) {
+        service.deleteEmployee(id);
+        return "redirect:/";
+    }
 }

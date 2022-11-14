@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,5 +26,18 @@ public class EmployeeService {
 
     public void saveEmployee(Employee employee) {
         repository.save(employee);
+    }
+
+    public boolean existById(long id) {
+        repository.existsById(id);
+        return true;
+    }
+
+    public Optional<Employee> showById(long id) {
+        return repository.findById(id);
+    }
+
+    public void deleteEmployee(long id) {
+        repository.deleteById(id);
     }
 }
