@@ -9,14 +9,16 @@
   <center>Изменение данных сотрудника</center>
 </h1>
 <h2 >Введите изменения:</h2>
-<form th:object="${editEmpl}" method="post">
-  <p>Имя: <input name="name" type="text" th:value="${name}"/></p>
-  <p>Фамилия: <input name="surname" type="text" th:value="${surname}"/></p>
-  <p>Дата рождения: <input name="birthday" type="date" th:value="${birthday}"/></p>
-  <p>Отдел: <input type="text" name="department" th:value="${department}"/></p>
-  <p>Дата трудоустройства: <input name="dateGetJob" type="date" th:value="${dateGetJob}" /></p>
-  <p>Зарплата: <input name="salary" type="number" th:value="${salary}"/></p>
-  <p><input type="submit" value="Ввод"/></p>
-</form>
+<div th:each="list:${editEmpl}">
+  <form method="post">
+    <p>Имя: <input name="name" type="text" th:value="${list.name}" class="form-control"/></p>
+    <p>Фамилия: <input name="surname" type="text" th:value="${list.surname}" class="form-control"/></p>
+    <p>Дата рождения: <input name="birthday" type="date" th:value="${list.birthday}" class="form-control"/></p>
+    <p>Отдел: <input name="department"  type="text" th:value="${list.department}" class="form-control"/></p>
+    <p>Дата трудоустройства: <input name="dateGetJob" type="date" th:value="${list.dateGetJob}" class="form-control"/></p>
+    <p>Зарплата: <input name="salary" type="number" th:value="${list.salary}" class="form-control"/></p>
+    <p><input type="submit" value="Ввод"/></p>
+  </form>
+</div>
 </body>
 </html>

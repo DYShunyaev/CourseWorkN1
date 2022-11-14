@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -52,8 +51,7 @@ public class EmployeeController {
         if(!service.existById(id)) {
             return "redirect:/";
         }
-        Optional<Employee> employee = service.showById(id);
-//        Employee employee = new Employee();
+        Employee employee = service.showById(id).orElseThrow();
         model.addAttribute("editEmpl", employee);
 
         return "editEmployee";
@@ -68,12 +66,14 @@ public class EmployeeController {
                            @RequestParam(name = "dateGetJob", required = false) Date dateGetJob,
                            @RequestParam(name = "salary", required = false) Long salary) {
         Employee employee = service.showById(id).orElseThrow();
+
         employee.setName(name);
         employee.setSurname(surname);
         employee.setBirthday(birthday);
         employee.setDepartment(department);
         employee.setDateGetJob(dateGetJob);
         employee.setSalary(salary);
+
         service.saveEmployee(employee);
 
         return "redirect:/";
@@ -82,6 +82,7 @@ public class EmployeeController {
     @RequestMapping("/{id}/deleteEmployee")
     public String deleteEmployeeById(@PathVariable(value = "id") long id) {
         service.deleteEmployee(id);
+
         return "redirect:/";
     }
 }
